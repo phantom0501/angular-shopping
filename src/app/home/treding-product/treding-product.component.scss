@@ -1,0 +1,89 @@
+.treding__product__wrap {
+  .treding__product__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+
+    h4 {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: calc(100% + 12px);
+        width: 50%;
+        height: 2px;
+        left: 0;
+        background-color: green;
+      }
+    }
+
+    ul {
+      padding-left: 0;
+      margin: 0 !important;
+      li {
+        position: relative;
+        list-style: none;
+        display: inline-block;
+        margin: 0 8px;
+        transition: all 0.25s;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 50%;
+          width: 0%;
+          transform: translateX(-50%);
+          height: 2px;
+          background-color: green;
+          transition: all 0.5s;
+        }
+
+        &:hover {
+          color: rgb(134, 172, 78);
+
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+
+      li.active {
+        position: relative;
+        color: rgb(134, 172, 78);
+
+        &::before {
+          width: 100%;
+        }
+      }
+    }
+
+    &__other {
+      display: flex;
+      align-items: center;
+
+      &__btn {
+        margin-left: 30px;
+        button {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          margin: 0 5px;
+          background-color: #ddd;
+          transition: all 0.5s;
+
+          &:hover {
+            background-color: green;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

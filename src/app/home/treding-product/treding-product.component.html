@@ -1,0 +1,29 @@
+<div class="container py-5">
+  <div class="treding__product__wrap">
+    <div class="treding__product__title">
+      <h4>Treding Products</h4>
+      <div class="treding__product__title__other">
+        <ul>
+          <li
+            *ngFor="let tabProduct of tabProducts; let id = index"
+            [ngClass]="{ active: tabProduct === selectedTab }"
+            (click)="chooseTab(tabProduct)"
+          >
+            {{ tabProduct }}
+          </li>
+        </ul>
+
+        <div class="treding__product__title__other__btn">
+          <button>-</button>
+          <button>+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="treding__product__item py-5">
+      <app-all-product *ngIf="selectedTab === 'All'"></app-all-product>
+      <app-best-seller *ngIf="selectedTab === 'BestSeller'"></app-best-seller>
+      <app-new-product *ngIf="selectedTab === 'New'"></app-new-product>
+    </div>
+  </div>
+</div>
