@@ -10,6 +10,22 @@ import { AllProductComponent } from './treding-product/all-product/all-product.c
 import { BestSellerComponent } from './treding-product/best-seller/best-seller.component';
 import { NewProductComponent } from './treding-product/new-product/new-product.component';
 import { HomeTemplateComponent } from './home-template/home-template.component';
+import { Routes, RouterModule } from '@angular/router';
+import { DetailComponent } from './detail/detail.component';
+
+const homeRoutes: Routes = [
+  {
+    path: '',
+    component: HomeTemplateComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      {
+        path: 'detail/:id',
+        component: DetailComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -23,6 +39,7 @@ import { HomeTemplateComponent } from './home-template/home-template.component';
     BestSellerComponent,
     NewProductComponent,
     HomeTemplateComponent,
+    DetailComponent,
   ],
   exports: [
     NavbarComponent,
@@ -32,6 +49,6 @@ import { HomeTemplateComponent } from './home-template/home-template.component';
     TredingProductComponent,
     HomeComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule.forChild(homeRoutes)],
 })
 export class HomeModule {}

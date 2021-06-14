@@ -1,0 +1,59 @@
+<div class="detail">
+  <div class="container">
+    <div class="detail__crumb">
+      <img
+        class="detail__crumb--home"
+        src="../../../assets/img/home.png"
+        alt=""
+      />
+      <img
+        class="detail__crumb--separate"
+        src="../../../assets/img/arrow-angle-pointing-to-right.png"
+        alt=""
+      />
+      <a href="">Product Name</a>
+      <img
+        class="detail__crumb--separate"
+        src="../../../assets/img/arrow-angle-pointing-to-right.png"
+        alt=""
+      />
+    </div>
+
+    <div class="detail__product py-5">
+      <div class="row">
+        <div class="col-5">
+          <div class="detail__product__img">
+            <img [src]="productDetails.hinhAnh" alt="" />
+          </div>
+        </div>
+        <div class="col-7">
+          <div class="detail__product__info">
+            <h4>{{ productDetails.tenPhim }}</h4>
+
+            <ul>
+              <li>
+                <p>Aliases:</p>
+                <span>{{ productDetails.biDanh }}</span>
+              </li>
+              <li>
+                <p>Descriptions:</p>
+                <span>{{ productDetails.moTa }}</span>
+              </li>
+              <li>
+                <p>Release date:</p>
+                <span>{{ productDetails.ngayKhoiChieu | date: "medium" }}</span>
+              </li>
+            </ul>
+
+            <div class="quantity">
+              <h5>Quantity</h5>
+              <button (click)="handleQuantity(false)">-</button>
+              <span>{{ quantityProduct }}</span>
+              <button (click)="handleQuantity(true)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

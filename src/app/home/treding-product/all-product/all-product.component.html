@@ -3,7 +3,7 @@
     <div class="product__item">
       <img class="" [src]="product.hinhAnh" [alt]="product.tenPhim" />
       <div class="product__item__content">
-        <a href="" class="">{{
+        <a href="" routerLink="/detail/{{ product.maPhim }}">{{
           product.tenPhim.length > 15
             ? product.tenPhim.substring(0, 15) + "..."
             : product.tenPhim
