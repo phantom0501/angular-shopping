@@ -11,6 +11,7 @@ import { ProductServiceService } from 'src/app/_core/services/product-service.se
 export class DetailComponent implements OnInit {
   productDetails: Product = new Product();
   quantityProduct: number = 1;
+  title: string = 'lorem';
   constructor(
     private route: ActivatedRoute,
     private productService: ProductServiceService

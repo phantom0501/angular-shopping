@@ -1,1 +1,18 @@
-<p>best-seller works!</p>
+<div class="row">
+  <div class="col-2 mb-4" *ngFor="let product of products">
+    <div class="product__item">
+      <img class="" [src]="product.hinhAnh" [alt]="product.tenPhim" />
+      <div class="product__item__content">
+        <a href="" routerLink="/detail/{{ product.maPhim }}">{{
+          product.tenPhim.length > 15
+            ? product.tenPhim.substring(0, 15) + "..."
+            : product.tenPhim
+        }}</a>
+
+        <button>
+          <img src="../../../../assets/img/shopping-cart.png" alt="" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

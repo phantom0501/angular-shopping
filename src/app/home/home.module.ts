@@ -12,6 +12,8 @@ import { NewProductComponent } from './treding-product/new-product/new-product.c
 import { HomeTemplateComponent } from './home-template/home-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailComponent } from './detail/detail.component';
+import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 const homeRoutes: Routes = [
   {
@@ -40,6 +42,7 @@ const homeRoutes: Routes = [
     NewProductComponent,
     HomeTemplateComponent,
     DetailComponent,
+    FooterComponent,
   ],
   exports: [
     NavbarComponent,
@@ -49,6 +52,6 @@ const homeRoutes: Routes = [
     TredingProductComponent,
     HomeComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(homeRoutes)],
+  imports: [CommonModule, FormsModule, RouterModule.forChild(homeRoutes)],
 })
 export class HomeModule {}

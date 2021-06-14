@@ -21,9 +21,18 @@
     </div>
 
     <div class="treding__product__item py-5">
-      <app-all-product *ngIf="selectedTab === 'All'"></app-all-product>
-      <app-best-seller *ngIf="selectedTab === 'BestSeller'"></app-best-seller>
-      <app-new-product *ngIf="selectedTab === 'New'"></app-new-product>
+      <app-all-product
+        [products]="products"
+        *ngIf="selectedTab === 'All'"
+      ></app-all-product>
+      <app-best-seller
+        [products]="products"
+        *ngIf="selectedTab === 'BestSeller'"
+      ></app-best-seller>
+      <app-new-product
+        [products]="products"
+        *ngIf="selectedTab === 'New'"
+      ></app-new-product>
     </div>
   </div>
 </div>
