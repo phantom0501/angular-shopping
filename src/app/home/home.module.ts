@@ -14,6 +14,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DetailComponent } from './detail/detail.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
 
 const homeRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const homeRoutes: Routes = [
       {
         path: 'detail/:id',
         component: DetailComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
     ],
   },
@@ -43,6 +48,7 @@ const homeRoutes: Routes = [
     HomeTemplateComponent,
     DetailComponent,
     FooterComponent,
+    CartComponent,
   ],
   exports: [
     NavbarComponent,

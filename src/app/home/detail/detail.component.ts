@@ -10,7 +10,6 @@ import { ProductServiceService } from 'src/app/_core/services/product-service.se
 })
 export class DetailComponent implements OnInit {
   productDetails: Product = new Product();
-  quantityProduct: number = 1;
   title: string = 'lorem';
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +27,5 @@ export class DetailComponent implements OnInit {
       .getProductDetails(id)
       .pipe()
       .subscribe((p) => (this.productDetails = p));
-  }
-
-  handleQuantity(value: boolean): void {
-    if (value) {
-      this.quantityProduct++;
-    } else if (this.quantityProduct > 1) {
-      this.quantityProduct--;
-    }
   }
 }

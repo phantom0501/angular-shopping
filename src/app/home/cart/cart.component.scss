@@ -1,0 +1,37 @@
+.cart {
+  &__top {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    background-color: #ddd;
+    border-radius: 5px;
+    &--home {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+    }
+
+    &--separate {
+      width: 10px;
+      height: 15px;
+      margin-right: 10px;
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      margin-right: 10px;
+      color: #333;
+      &:hover {
+        color: green;
+      }
+    }
+  }
+
+  &__info {
+    h4 {
+      span {
+      }
+    }
+  }
+}
