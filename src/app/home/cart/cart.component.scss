@@ -33,5 +33,21 @@
       span {
       }
     }
+
+    table {
+      tbody {
+        tr {
+          td {
+            span {
+              font-size: 14px;
+            }
+            img {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+    }
   }
 }

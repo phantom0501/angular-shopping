@@ -1,11 +1,9 @@
 export class Product {
-  maPhim: number = 0;
-  tenPhim: string = '';
-  biDanh: string = '';
-  trailer: string = '';
-  hinhAnh: string = '';
-  moTa: string = '';
-  maNhom: string = '';
-  ngayKhoiChieu: string = '';
-  danhGia: number = 0;
+  id: number = 0;
+  title: string = '';
+  price: number = 0;
+  category: string = '';
+  description: string = '';
+  image: string = '';
+  quantity: number = 1;
 }

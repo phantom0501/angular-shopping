@@ -16,26 +16,52 @@
     </div>
 
     <div class="cart__info">
-      <h4>Shopping Cart <span>(1 item)</span></h4>
+      <h5 class="py-3">Shopping Cart <span>(item)</span></h5>
 
-      <table class="table">
+      <p class="text-center text-danger" *ngIf="cartStore.length === 0">
+        Your shopping cart is empty.
+      </p>
+      <table class="table" *ngIf="cartStore.length > 0">
         <thead>
           <tr>
             <th>Image</th>
             <th>Product Name</th>
             <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let cartItem of cartStore">
+            <td scope="row">
+              <img [src]="cartItem.image" alt="" />
+            </td>
+            <td>
+              <span>{{ cartItem.title }}</span>
+            </td>
+            <td>
+              <button
+                class="btn btn-info"
+                (click)="handleQuantity(cartItem.id, false)"
+              >
+                -
+              </button>
+              <span class="mx-2">{{ cartItem.quantity }}</span>
+              <button
+                class="btn btn-info"
+                (click)="handleQuantity(cartItem.id, true)"
+              >
+                +
+              </button>
+            </td>
+            <td>
+              <span>{{ cartItem.price }}$</span>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="delete(cartItem)">
+                x
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -13,12 +13,11 @@ export class BestSellerComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterTheBest();
-    console.log(this.products);
   }
 
   filterTheBest(): void {
-    let bestProduct = this.products.filter((item) => item.danhGia === 10);
-
-    this.products = bestProduct.splice(0, 12).reverse();
+    this.products = this.products
+      .filter((item) => item.price < 100)
+      .sort((a, b) => a.price - b.price);
   }
 }

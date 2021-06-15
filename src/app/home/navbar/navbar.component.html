@@ -14,8 +14,10 @@
 
       <div class="nav__cart">
         <div class="nav__cart__icon">
-          <a href=""><img src="../../../assets/img/cart__nav.png" alt="" /> </a>
-          <span>0</span>
+          <a routerLink="/cart"
+            ><img src="../../../assets/img/cart__nav.png" alt="" />
+          </a>
+          <span>{{ notifyStore.length }}</span>
         </div>
 
         <span>$0.00</span>

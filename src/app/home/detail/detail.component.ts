@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from 'src/app/_core/models/product';
-import { ProductServiceService } from 'src/app/_core/services/product-service.service';
+import { ProductService } from 'src/app/_core/services/product.service';
 
 @Component({
   selector: 'app-detail',
@@ -13,7 +13,7 @@ export class DetailComponent implements OnInit {
   title: string = 'lorem';
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductServiceService
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -23,9 +23,9 @@ export class DetailComponent implements OnInit {
   getProductDetails(): void {
     const params: Params = this.route.params.pipe();
     let { id } = params.value;
+
     this.productService
       .getProductDetails(id)
-      .pipe()
       .subscribe((p) => (this.productDetails = p));
   }
 }

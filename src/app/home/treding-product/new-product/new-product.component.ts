@@ -15,8 +15,8 @@ export class NewProductComponent implements OnInit {
   }
 
   filterNewProduct(): void {
-    let filterProduct = this.products.filter((item) => item.danhGia !== 10);
-
-    this.products = filterProduct;
+    this.products = this.products
+      .filter((item) => item.price >= 100)
+      .sort((a, b) => a.price - b.price);
   }
 }

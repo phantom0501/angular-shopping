@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/_core/models/product';
-import { ProductServiceService } from 'src/app/_core/services/product-service.service';
+import { ProductService } from 'src/app/_core/services/product.service';
 
 @Component({
   selector: 'app-treding-product',
@@ -11,8 +11,9 @@ export class TredingProductComponent implements OnInit {
   tabProducts: string[] = ['All', 'BestSeller', 'New'];
   selectedTab?: string;
   products: Product[] = [];
+  productCart: Product[] = [];
 
-  constructor(private productService: ProductServiceService) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.selectedTab = this.tabProducts[0];
@@ -25,7 +26,7 @@ export class TredingProductComponent implements OnInit {
 
   getProducts(): void {
     this.productService
-      .getProduct()
+      .getProducts()
       .subscribe((product) => (this.products = product));
   }
 }
