@@ -1,19 +1,27 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/_core/models/product';
+import { CartService } from 'src/app/_core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit, AfterViewChecked {
-  local: any = localStorage.getItem('localCart');
-  localPare: Product[] = JSON.parse(this.local);
-  notifyStore: Product[] = [];
+export class NavbarComponent implements OnInit {
+  cartCount: number = 0;
 
-  constructor() {}
+  constructor(private cartService: CartService) {
+    this.cartService.cartSubject.subscribe((data) => (this.cartCount = data));
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.myCartCount();
+  }
 
-  ngAfterViewChecked(): void {}
+  myCartCount(): void {
+    if (localStorage.getItem('localCart') !== null) {
+      let cartLocal = JSON.parse(localStorage.getItem('localCart') || '{}');
+      this.cartCount = cartLocal.length;
+    }
+  }
 }
