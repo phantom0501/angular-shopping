@@ -25,6 +25,7 @@
       <button
         *ngIf="localPare.length === 0"
         class="btn btn-success mt-5 d-flex"
+        (click)="navigate()"
         style="margin-left: auto; margin-right: 80px"
       >
         Continue
@@ -64,7 +65,7 @@
               </button>
             </td>
             <td>
-              <span>{{ cartItem.price * cartItem.quantity }}$</span>
+              <span>{{ cartItem.price * cartItem.quantity | number }}$</span>
             </td>
             <td>
               <button class="btn btn-danger" (click)="delete(cartItem)">
@@ -83,19 +84,19 @@
             <thead>
               <tr>
                 <th>Sub-Total:</th>
-                <td style="text-align: right">$902.00</td>
+                <td style="text-align: right">${{ subTotal.toFixed(2) }}</td>
               </tr>
               <tr>
                 <th>Eco Tax (-2.00):</th>
-                <td style="text-align: right">$2.00</td>
+                <td style="text-align: right">${{ EcoTax * 2 | number }}</td>
               </tr>
               <tr>
                 <th>VAT (20%):</th>
-                <td style="text-align: right">$180.40</td>
+                <td style="text-align: right">${{ VAT }}</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td style="text-align: right">$1,084.40</td>
+                <td style="text-align: right">${{ total }}</td>
               </tr>
             </thead>
           </table>

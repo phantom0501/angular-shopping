@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 
 import { JsonpClientBackend } from '@angular/common/http';
 import { CartService } from 'src/app/_core/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,21 +13,34 @@ import { CartService } from 'src/app/_core/services/cart.service';
 export class CartComponent implements OnInit, AfterViewChecked {
   localPare: Product[] = JSON.parse(localStorage.getItem('localCart') || '{}');
   cartNumber: number = 0;
+  subTotal: number = 0;
+  EcoTax: number = 0;
+  VAT: number = 0;
+  total: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private router: Router, private cartService: CartService) {
+    this.subTotalFunc();
+  }
 
   ngOnInit(): void {
     this.localPare;
+    this.subTotalFunc();
   }
 
   handleQuantity(cartItem: number, value: boolean): void {
     let index = this.localPare.findIndex((item) => item.id === cartItem);
 
     if (value && index !== -1) {
-      this.localPare[index].quantity++;
+      if (this.localPare[index].quantity !== 5) {
+        this.localPare[index].quantity++;
+      }
     } else if (this.localPare[index].quantity > 1) {
       this.localPare[index].quantity--;
     }
+
+    localStorage.setItem('localCart', JSON.stringify(this.localPare));
+
+    this.subTotalFunc();
   }
 
   delete(cartItem: Product): void {
@@ -37,7 +51,27 @@ export class CartComponent implements OnInit, AfterViewChecked {
 
     localStorage.setItem('localCart', JSON.stringify(this.localPare));
 
+    this.subTotalFunc();
     this.cartNumberFunc();
+  }
+
+  subTotalFunc(): void {
+    this.subTotal = this.localPare.reduce((subTotal, item) => {
+      return (subTotal += item.price * item.quantity);
+    }, 0);
+
+    this.EcoTax = this.localPare.reduce((subTotal, item) => {
+      return (subTotal += item.quantity);
+    }, 0);
+
+    this.VAT = (this.subTotal / 100) * 20;
+
+    this.total = this.subTotal + this.EcoTax + this.VAT;
+    localStorage.setItem('localCart', JSON.stringify(this.localPare));
+  }
+
+  navigate(): void {
+    this.router.navigate(['/']);
   }
 
   cartNumberFunc(): void {
