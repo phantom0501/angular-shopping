@@ -1,7 +1,6 @@
+import Swal from 'sweetalert2';
 import { Product } from './../../_core/models/product';
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
-
-import { JsonpClientBackend } from '@angular/common/http';
 import { CartService } from 'src/app/_core/services/cart.service';
 import { Router } from '@angular/router';
 
@@ -12,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit, AfterViewChecked {
   localPare: Product[] = JSON.parse(localStorage.getItem('localCart') || '{}');
+  orderList?: [number, string];
   cartNumber: number = 0;
   subTotal: number = 0;
   EcoTax: number = 0;
@@ -78,6 +78,14 @@ export class CartComponent implements OnInit, AfterViewChecked {
     let cartValue = JSON.parse(localStorage.getItem('localCart') || '{}');
     this.cartNumber = cartValue.length;
     this.cartService.cartSubject.next(this.cartNumber);
+  }
+
+  submit(value: any): void {
+    console.log(value);
+  }
+
+  openPopupSuccess(): void {
+    Swal.fire('Order Success', '', 'success');
   }
 
   ngAfterViewChecked(): void {}
