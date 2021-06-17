@@ -34,7 +34,10 @@
           required
         />
 
-        <div *ngIf="password?.touched && password?.invalid">
+        <div
+          class="invalid-feedback"
+          *ngIf="password?.touched && password?.invalid"
+        >
           <div *ngIf="password?.errors?.required">Password is empty</div>
         </div>
       </div>

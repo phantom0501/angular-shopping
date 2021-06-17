@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit, AfterViewChecked {
   @ViewChild('getInfo') formOrder!: NgForm;
   localPare: Product[] = JSON.parse(localStorage.getItem('localCart') || '{}');
-  orderList: any[] = JSON.parse(localStorage.getItem('localUser') || '{}');
+  orderList: any[] = JSON.parse(localStorage.getItem('localUserOrder') || '[]');
   cartNumber: number = 0;
   subTotal: number = 0;
   EcoTax: number = 0;
@@ -39,6 +39,7 @@ export class CartComponent implements OnInit, AfterViewChecked {
       Address: new FormControl('', [Validators.required]),
     });
     this.localPare;
+    this.orderList;
     this.subTotalFunc();
   }
 
@@ -105,6 +106,15 @@ export class CartComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['/']);
   }
 
+  openPopupSuccess(): void {
+    Swal.fire('Order Success', '', 'success');
+    this.localPare = [];
+
+    localStorage.setItem('localCart', JSON.stringify(this.localPare));
+
+    this.cartNumberFunc();
+  }
+
   cartNumberFunc(): void {
     let cartValue = JSON.parse(localStorage.getItem('localCart') || '{}');
     this.cartNumber = cartValue.length;
@@ -113,18 +123,8 @@ export class CartComponent implements OnInit, AfterViewChecked {
 
   submit(): void {
     this.orderList.push(this.form.value);
-    this.formOrder.reset();
 
-    localStorage.setItem('localUser', JSON.stringify(this.orderList));
-  }
-
-  openPopupSuccess(): void {
-    Swal.fire('Order Success', '', 'success');
-    this.localPare = [];
-
-    localStorage.setItem('localCart', JSON.stringify(this.localPare));
-
-    this.cartNumberFunc();
+    localStorage.setItem('localUserOrder', JSON.stringify(this.orderList));
   }
 
   ngAfterViewChecked(): void {}

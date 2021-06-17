@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
             title: result.msg,
           });
         } else {
-          console.log(result);
-
           let { username } = this.form.value;
 
           localStorage.setItem('userLogin', JSON.stringify(username));
