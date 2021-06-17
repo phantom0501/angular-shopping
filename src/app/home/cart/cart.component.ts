@@ -123,6 +123,7 @@ export class CartComponent implements OnInit, AfterViewChecked {
 
   submit(): void {
     this.orderList.push(this.form.value);
+    this.formOrder.reset();
 
     localStorage.setItem('localUserOrder', JSON.stringify(this.orderList));
   }
