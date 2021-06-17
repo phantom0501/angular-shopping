@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     &--input {
       position: relative;
@@ -38,10 +39,98 @@
         border-bottom-right-radius: 10px;
       }
     }
+
+    &__result {
+      position: absolute;
+      top: 135%;
+      width: 600px;
+      z-index: 1000;
+      padding-left: 0;
+      margin-bottom: 0;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px rgba($color: #000000, $alpha: 0.5);
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+
+  .nav__login {
+    margin-right: 30px;
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: #333;
+
+      &:hover {
+        color: green;
+      }
+    }
+  }
+
+  .nav__logged {
+    margin-right: 30px;
+    position: relative;
+
+    &:hover {
+      .nav__logged__logout {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    img {
+      display: inline-block;
+      margin-right: 8px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid red;
+    }
+
+    &__logout {
+      position: absolute;
+      right: 0;
+      width: 100%;
+      top: 130%;
+      background-color: red;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: 0;
+      text-align: center;
+      visibility: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        height: 12px;
+        right: 0;
+        background-color: transparent;
+      }
+      span {
+        display: block;
+        color: #fff;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+    }
   }
 
   .nav__cart {
     display: flex;
+    align-items: flex-end;
+    position: relative;
+
+    &:hover {
+      .nav__cart__go {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
 
     .nav__cart__icon {
       position: relative;
@@ -69,6 +158,44 @@
 
     span {
       font-size: 14px;
+    }
+
+    &__name {
+      display: inline-block;
+    }
+
+    &__go {
+      display: block;
+      text-decoration: none;
+      position: absolute;
+      padding: 5px 20px;
+      top: 120%;
+      width: 120px;
+      border-radius: 5px;
+      color: #fff;
+      right: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s;
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        width: 100%;
+        height: 10px;
+        background-color: transparent;
+      }
+    }
+
+    &__go--empty {
+      background-color: #ddd;
+      width: 200px;
+      font-size: 12px;
+      text-align: center;
+      padding: 20px 8px;
+      color: #333;
     }
   }
 }

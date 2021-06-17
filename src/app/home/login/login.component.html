@@ -1,0 +1,46 @@
+<div class="login">
+  <div class="login__wrap-content">
+    <form action="" [formGroup]="form" (ngSubmit)="login()">
+      <div class="form-group mb-3">
+        <label for="">Username*</label>
+        <input
+          type="text"
+          formControlName="username"
+          [ngClass]="{ 'is-invalid': username?.touched && username?.invalid }"
+          class="form-control"
+          placeholder=""
+          required
+        />
+
+        <div
+          class="invalid-feedback"
+          *ngIf="username?.touched && username?.invalid"
+        >
+          <div *ngIf="username?.errors?.required">Username is required</div>
+          <div *ngIf="username?.errors?.minlength">
+            Username must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="">Password*</label>
+        <input
+          type="password"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': password?.touched && password?.invalid }"
+          class="form-control"
+          placeholder=""
+          required
+        />
+
+        <div *ngIf="password?.touched && password?.invalid">
+          <div *ngIf="password?.errors?.required">Password is empty</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-info" [disabled]="form.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

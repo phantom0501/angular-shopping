@@ -13,8 +13,9 @@ import { HomeTemplateComponent } from './home-template/home-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailComponent } from './detail/detail.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
+import { LoginComponent } from './login/login.component';
 
 const homeRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ const homeRoutes: Routes = [
     component: HomeTemplateComponent,
     children: [
       { path: '', component: HomeComponent },
+
       {
         path: 'detail/:id',
         component: DetailComponent,
@@ -32,6 +34,8 @@ const homeRoutes: Routes = [
       },
     ],
   },
+
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -49,6 +53,7 @@ const homeRoutes: Routes = [
     DetailComponent,
     FooterComponent,
     CartComponent,
+    LoginComponent,
   ],
   exports: [
     NavbarComponent,
@@ -58,6 +63,11 @@ const homeRoutes: Routes = [
     TredingProductComponent,
     HomeComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule.forChild(homeRoutes)],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forChild(homeRoutes),
+  ],
 })
 export class HomeModule {}

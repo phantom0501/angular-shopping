@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/_core/models/product';
 import { CartService } from 'src/app/_core/services/cart.service';
@@ -14,7 +15,7 @@ export class AllProductComponent implements OnInit, AfterViewChecked {
     : [];
   cartNumber: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private route: Router) {}
 
   ngOnInit(): void {}
 
@@ -22,14 +23,19 @@ export class AllProductComponent implements OnInit, AfterViewChecked {
     let quantity: any = 1;
     let productUpdate = { ...product, quantity };
     let index = this.cartItem.findIndex((item) => item.id === productUpdate.id);
-    if (index !== -1) {
-      this.cartItem[index].quantity++;
+    if (localStorage.getItem('userLogin') === null) {
+      this.route.navigate(['/login']);
     } else {
-      this.cartItem.push(productUpdate);
-    }
-    localStorage.setItem('localCart', JSON.stringify(this.cartItem));
+      if (index !== -1) {
+        this.cartItem[index].quantity++;
+      } else {
+        this.cartItem.push(productUpdate);
+      }
 
-    this.cartNumberFunc();
+      localStorage.setItem('localCart', JSON.stringify(this.cartItem));
+
+      this.cartNumberFunc();
+    }
   }
 
   cartNumberFunc(): void {

@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light py-3"
+  style="z-index: 999"
+>
   <div class="container">
     <div class="nav__content">
       <a class="navbar-brand" routerLink="/">
@@ -7,18 +10,47 @@
 
       <div class="nav__search">
         <div class="nav__search--input">
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            #searchBox
+            placeholder="Search"
+            (input)="search(searchBox.value)"
+          />
           <button class="">Search</button>
         </div>
       </div>
 
+      <div class="nav__logged" *ngIf="userLogin !== ''">
+        <img src="https://i.pravatar.cc/50" alt="" />
+        <span>{{ userLogin }}</span>
+
+        <div class="nav__logged__logout">
+          <span (click)="logout()">Logout</span>
+        </div>
+      </div>
+
+      <div class="nav__login" *ngIf="!(userLogin !== '')">
+        <a routerLink="/login">Login</a>
+      </div>
+
       <div class="nav__cart">
         <div class="nav__cart__icon">
-          <a routerLink="/cart"
-            ><img src="../../../assets/img/cart__nav.png" alt="" />
-          </a>
+          <a><img src="../../../assets/img/cart__nav.png" alt="" /> </a>
           <span>{{ cartCount }}</span>
         </div>
+
+        <span class="nav__cart__name">Cart</span>
+
+        <div *ngIf="cartCount === 0" class="nav__cart__go nav__cart__go--empty">
+          Your shopping cart is empty!
+        </div>
+
+        <a
+          *ngIf="cartCount >= 1"
+          class="nav__cart__go bg-success"
+          routerLink="/cart"
+          >View Cart</a
+        >
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="cart" style="padding-bottom: 300px">
+<div class="container pb-5">
+  <div class="cart" style="padding-bottom: 100px">
     <div class="cart__top">
       <img class="cart__top--home" src="../../../assets/img/home.png" alt="" />
       <img
@@ -96,7 +96,7 @@
               </tr>
               <tr>
                 <th>Total:</th>
-                <td style="text-align: right">${{ total }}</td>
+                <td style="text-align: right">${{ total.toFixed(2) }}</td>
               </tr>
             </thead>
           </table>
@@ -114,88 +114,131 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header text-white" style="background-color: #243a76">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Customer Information
-          </h5>
-        </div>
-        <div class="modal-body">
-          <form action="" #getInfo="ngForm" (ngSubmit)="submit(getInfo.value)">
-            <div class="form-group mb-4">
-              <label for="">Fullname*</label>
-              <input
-                type="text"
-                name="Fullname"
-                required
-                class="form-control"
-                placeholder=""
-                ngModel
-              />
-            </div>
-            <div class="form-group mb-4">
-              <label for="">Email*</label>
-              <input
-                type="text"
-                name="Email"
-                required
-                ngModel
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-            <div class="form-group mb-4">
-              <label for="">Phone*</label>
-              <input
-                type="text"
-                name="Phone"
-                required
-                ngModel
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-            <div class="form-group mb-4">
-              <label for="">Address*</label>
-              <input
-                type="text"
-                name="Address"
-                required
-                ngModel
-                class="form-control"
-                placeholder=""
-              />
-            </div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #243a76">
+        <h5 class="modal-title" id="exampleModalLabel">Customer Information</h5>
+      </div>
+      <div class="modal-body">
+        <form
+          action=""
+          #getInfo="ngForm"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+        >
+          <div class="form-group mb-4">
+            <label for="">Fullname*</label>
+            <input
+              type="text"
+              formControlName="FullName"
+              required
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': FullName?.touched && FullName?.invalid
+              }"
+              placeholder=""
+            />
 
-            <div class="form-group">
-              <div class="modal-footer" style="border-top: none">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  class="btn btn-success"
-                  (click)="openPopupSuccess()"
-                >
-                  Order
-                </button>
+            <div
+              *ngIf="FullName?.touched && FullName?.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="FullName?.errors?.required">Name is required</div>
+              <div *ngIf="FullName?.errors?.minlength">
+                Name must be at least 4 characters long.
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="">Email*</label>
+            <input
+              type="text"
+              formControlName="Email"
+              [ngClass]="{ 'is-invalid': Email?.touched && Email?.invalid }"
+              required
+              class="form-control"
+              placeholder=""
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="Email?.touched && Email?.invalid"
+            >
+              <div *ngIf="Email?.errors?.required">Email is required</div>
+              <div *ngIf="Email?.errors?.email">
+                Email must be a valid email Address
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label for="">Phone*</label>
+            <input
+              type="text"
+              formControlName="Phone"
+              [ngClass]="{ 'is-invalid': Phone?.touched && Phone?.invalid }"
+              required
+              class="form-control"
+              placeholder=""
+            />
+
+            <div
+              class="invalid-feedback"
+              *ngIf="Phone?.touched && Phone?.invalid"
+            >
+              <div *ngIf="Phone?.errors?.required">Phone is required</div>
+              <div *ngIf="Phone?.errors?.pattern">Invalid phone number</div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="">Address*</label>
+            <input
+              type="text"
+              formControlName="Address"
+              [ngClass]="{
+                'is-invalid': Address?.touched && Address?.invalid
+              }"
+              required
+              class="form-control"
+              placeholder=""
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="Address?.touched && Address?.invalid"
+            >
+              <div *ngIf="Address?.errors?.required">Address is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="modal-footer" style="border-top: none">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                [disabled]="form.invalid"
+                (click)="openPopupSuccess()"
+              >
+                Order
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
